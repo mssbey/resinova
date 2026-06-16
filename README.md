@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RESINOVA — Premium Epoksi E-Ticaret Platformu
 
-## Getting Started
+> Next.js 16 App Router · React 19 · TypeScript · Tailwind CSS v4
 
-First, run the development server:
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](#)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2.7-000?logo=nextdotjs)](https://nextjs.org)
+[![License](https://img.shields.io/badge/license-private-red)](#)
+
+---
+
+## Hızlı Başlangıç
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/YOUR_USERNAME/resinova.git
+cd resinova/nextapp
+cp .env.example .env.local      # env değişkenlerini doldur
+npm install
+npm run dev                      # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Değişkenleri
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Değişken | Açıklama | Zorunlu |
+|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | Sitenin tam URL'si (https://resinova.com.tr) | ✅ |
+| `JWT_SECRET` | En az 32 karakter güçlü anahtar | ✅ |
+| `DB_HOST` | Veritabanı sunucusu (ileriye dönük) | — |
+| `DB_NAME` | Veritabanı adı (ileriye dönük) | — |
+| `DB_USER` | Veritabanı kullanıcı adı (ileriye dönük) | — |
+| `DB_PASSWORD` | Veritabanı şifresi (ileriye dönük) | — |
+| `SMTP_HOST` | SMTP sunucu (ileriye dönük) | — |
 
-## Learn More
+`.env.example` dosyasında tüm değişkenler açıklamalı şekilde listelenmiştir.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Vercel'e Deploy
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 1. GitHub'a Push
 
-## Deploy on Vercel
+```bash
+cd nextapp
+git init
+git add .
+git commit -m "feat: production-ready Resinova v1.0"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/resinova.git
+git push -u origin main
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. Vercel'de Proje Oluştur
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. [vercel.com](https://vercel.com) → **Add New Project**
+2. GitHub reposunu seç → **Root Directory** = `nextapp`
+3. **Environment Variables** bölümüne ekle:
+   - `NEXT_PUBLIC_SITE_URL` = `https://resinova.com.tr`
+   - `JWT_SECRET` = (güçlü anahtar)
+4. **Deploy** butonuna bas — ilk deployda otomatik açılır
+
+Build komutu ve output dizini `vercel.json` ile otomatik algılanır.
+
+---
+
+## Proje Yapısı
+
+```
+nextapp/
+├── src/
+│   ├── app/                  # Next.js App Router (48 rota)
+│   │   ├── layout.tsx        # Root layout — metadata, OG, Twitter Card
+│   │   ├── sitemap.ts        # /sitemap.xml — otomatik üretilir
+│   │   ├── robots.ts         # /robots.txt — otomatik üretilir
+│   │   ├── not-found.tsx     # Özel 404 sayfası
+│   │   ├── loading.tsx       # Global yükleme ekranı
+│   │   ├── globals.css       # Tasarım sistemi & Tailwind tokens
+│   │   ├── admin/            # Admin paneli (20+ sayfa)
+│   │   ├── hesabim/          # Hesap yönetimi (8 sayfa)
+│   │   ├── urunler/          # Ürün listesi + detay
+│   │   └── akademi/          # Blog/Eğitim listesi + detay
+│   ├── components/           # Layout, Home, Cart, UI bileşenleri
+│   ├── data/                 # TypeScript veri katmanı (23 modül)
+│   └── lib/                  # Store, SEO yardımcıları (13 modül)
+├── public/                   # Statik dosyalar, logolar, favicon
+├── next.config.ts            # Güvenlik headers, AVIF/WebP, bundle opt.
+├── vercel.json               # Vercel deploy & cache ayarları
+├── server.js                 # Plesk başlatma dosyası
+├── .env.example              # Env şablonu (güvenli — commit edilir)
+└── package.json
+```
+
+---
+
+## Komutlar
+
+| Komut | Açıklama |
+|---|---|
+| `npm run dev` | Geliştirme sunucusu (localhost:3000, Turbopack) |
+| `npm run build` | Production build |
+| `npm run start` | Production sunucusu |
+| `npm run start:plesk` | Plesk için server.js ile başlatma |
+| `npm run lint` | ESLint kontrolü |
+
+---
+
+## Teknoloji Yığını
+
+| Alan | Teknoloji |
+|---|---|
+| Framework | Next.js 16.2.7 (App Router + Turbopack) |
+| UI | React 19 · TypeScript 5 · Tailwind CSS v4 |
+| Bileşenler | Radix UI primitives · Lucide Icons |
+| Animasyon | Framer Motion 12 · GSAP 3 |
+| State | Custom localStorage stores (Cart, Auth, Wishlist) |
+| SEO | Metadata API · JSON-LD · Sitemap · robots.txt |
+| Görsel | next/image · AVIF/WebP · Unsplash CDN |
+| Güvenlik | CSP-ready headers · XSS · Clickjacking koruması |
+
+---
+
+## Demo Hesaplar
+
+| E-posta | Şifre | Rol |
+|---|---|---|
+| `elif@resinova.demo` | `demo1234` | Müşteri |
+| `ahmet@ahsapmoda.demo` | `demo1234` | Bayi (%18 indirim) |
+| `admin@resinova.demo` | `demo1234` | Admin (tam yetki) |
+
+> Demo auth sistemi localStorage tabanlıdır. Üretimde NextAuth/Auth.js ile değiştirilmesi planlanmaktadır.
+
+---
+
+## Lisans
+
+Özel mülkiyet. Tüm hakları saklıdır © 2026 RESINOVA.
