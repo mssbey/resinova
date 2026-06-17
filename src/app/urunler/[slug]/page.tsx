@@ -75,7 +75,7 @@ export default function ProductDetailPage() {
       <Header />
       <main style={{ background: "#FAFAF8" }}>
         {/* Breadcrumb */}
-        <div className="container-premium pt-28 pb-6">
+        <div className="container-premium pt-32 pb-10">
           <nav className="flex items-center gap-2 text-xs text-[#6B7280]" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             <Link href="/" className="hover:text-[#D4AF37] transition-colors">Ana Sayfa</Link>
             <span>/</span>
@@ -168,7 +168,7 @@ export default function ProductDetailPage() {
             {/* Product info */}
             <div>
               {/* Category */}
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-6">
                 <Link
                   href={`/urunler?kategori=${product.categorySlug}`}
                   className="text-xs font-bold uppercase tracking-widest text-[#D4AF37] hover:underline"
@@ -577,9 +577,9 @@ export default function ProductDetailPage() {
 
         {/* Related products */}
         {relatedProducts.length > 0 && (
-          <div className="container-premium pre-footer-grid">
+          <div className="container-premium pre-footer-grid pt-12">
             <h2
-              className="text-2xl font-black text-[#111827] mb-8"
+              className="text-2xl font-black text-[#111827] mb-10"
               style={{ fontFamily: "'Montserrat', sans-serif" }}
             >
               Benzer Ürünler
