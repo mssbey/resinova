@@ -236,7 +236,7 @@ export default function Footer() {
             <div>
               <Link href="/" className="block mb-8">
                 <Image src="/images/logos/logo-beyaz.png" alt="RESINOVA"
-                  width={220} height={62} className="h-16 w-auto object-contain" />
+                  width={220} height={62} className="h-[72px] w-auto object-contain" />
               </Link>
 
               <p className="text-white/58 text-sm leading-[1.9] mb-9"
