@@ -75,7 +75,7 @@ export default function ProductDetailPage() {
       <Header />
       <main style={{ background: "#FAFAF8" }}>
         {/* Breadcrumb */}
-        <div className="container-premium pt-32 pb-10">
+        <div className="container-premium pt-8 pb-6">
           <nav className="flex items-center gap-2 text-xs text-[#6B7280]" style={{ fontFamily: "'Montserrat', sans-serif" }}>
             <Link href="/" className="hover:text-[#D4AF37] transition-colors">Ana Sayfa</Link>
             <span>/</span>
